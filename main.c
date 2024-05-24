@@ -43,35 +43,35 @@ int main(void)
             {
                 case 1:
                 {
-									OLED_ShowNum(32,32,Keynum,2,12,1);
+	//								OLED_ShowNum(32,32,Keynum,2,12,1);
                     LED_SendData(1);
                     Keynum = 0;
                     break;
                 }
                 case 2:
                 {
-									OLED_ShowNum(32,32,Keynum,2,12,1);
+	//								OLED_ShowNum(32,32,Keynum,2,12,1);
                     LED_SendData(2);
                     Keynum = 0;
                     break;
                 }
                 case 3:
                 {
-									OLED_ShowNum(32,32,Keynum,2,12,1);
+	//								OLED_ShowNum(32,32,Keynum,2,12,1);
                     LED_SendData(3);
                     Keynum = 0;
                     break;
                 }
                 case 4:
                 {
-									OLED_ShowNum(32,32,Keynum,2,12,1);
+		//							OLED_ShowNum(32,32,Keynum,2,12,1);
                     LED_SendData(4);
                     Keynum = 0;
                     break;
                 }
                 case 5:
                 {
-									OLED_ShowNum(32,32,Keynum,2,12,1);
+		//							OLED_ShowNum(32,32,Keynum,2,12,1);
                     LED_SendData(5);
                     Keynum = 0;
                     break;
@@ -89,13 +89,13 @@ void TIM3_IRQHandler(void)
     static uint16_t Temp = 0;
     if(TIM_GetITStatus(TIM3, TIM_IT_Update)!= RESET)
     {
-				T0Count++;
+        T0Count++;
         Send_count++;
-				if(T0Count%20==0)
-				{
-					Key_Loop();
-					T0Count = 0;
-				}
+        if(T0Count%20==0)
+        {
+            Key_Loop();
+            T0Count = 0;
+        }
         if(Send_count >= Send_data_Delay)
         {
             Send_count = 0;
@@ -170,10 +170,17 @@ void TIM3_IRQHandler(void)
 void LED_SendData(uint_fast16_t KEY_State)
 {
     uint16_t i = 0;
-		TIM_Cmd(TIM4,DISABLE);                   //¿ªÆô°´¼üÖÐ¶Ï	
-    while(DS18B20_SendData_Mode != DS18B20_SendData_Stop);                    //·ÀÖ¹¸ú·¢ËÍÎÂ¶È³åÍ»
-		TIM_Cmd(TIM3,DISABLE);
-		delay_ms(50);
+	
+    TIM4->DIER &= (uint16_t)~TIM_IT_Update;
+    TIM4->CNT = 0;
+    OLED_ShowNum(64,0,DS18B20_SendData_Mode,2,12,1);
+    while(DS18B20_SendData_Mode != DS18B20_SendData_Stop)                    //·ÀÖ¹¸ú·¢ËÍÎÂ¶È³åÍ»
+    {
+        if(TIM4->CNT > 2000)
+            break;
+    }
+    TIM_Cmd(TIM3,DISABLE);
+    delay_ms(50);
     TIM2->CCR1 = 10;                   //1
     delay_ms(20);
     TIM2->CCR1 = 20;                    //0
@@ -186,17 +193,18 @@ void LED_SendData(uint_fast16_t KEY_State)
         delay_ms(20);
     }
     TIM2->CCR1 = 20;
-		TIM_Cmd(TIM3,ENABLE);
-    TIM_Cmd(TIM4,ENABLE);
+    TIM_Cmd(TIM3,ENABLE);
+    TIM4->CNT = 0;
+    TIM4->DIER |= TIM_IT_Update;
 }
 
 void TIM4_IRQHandler(void)                 //·¢ËÍÎÂ¶È
 {
-    static uint16_t count = 0; 
-     if(TIM_GetITStatus(TIM4, TIM_IT_Update)!= RESET)
+    static uint16_t count = 0;
+    if(TIM_GetITStatus(TIM4, TIM_IT_Update)!= RESET)
     {
         OLED_ShowNum(16,16,count++,4,12,1);
-        DS18B20_SendData_Mode = DS18B20_SendData_Start;
+				DS18B20_SendData_Mode = DS18B20_SendData_Start;
         TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
     }
 }

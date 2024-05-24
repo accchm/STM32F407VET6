@@ -1,8 +1,4 @@
-*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'Template'
-compiling main.c...
-linking...
-Program Size: Code=12988 RO-data=8120 RW-data=72 ZI-data=2984  
-FromELF: creating hex file...
-"..\OBJ\Template.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:01
+Load "..\\OBJ\\Template.axf" 
+No ST-LINK detected
+Error: Flash Download failed  -  Target DLL has been cancelled
+Flash Load finished at 19:26:43
