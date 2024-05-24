@@ -101,19 +101,19 @@
         {
             "name": "Template",
             "includePath": [
-                "c:\\32\\stm32F4\\实验0 Template工程模板\\CORE",
-                "c:\\32\\stm32F4\\实验0 Template工程模板\\SYSTEM\\delay",
-                "c:\\32\\stm32F4\\实验0 Template工程模板\\SYSTEM\\sys",
-                "c:\\32\\stm32F4\\实验0 Template工程模板\\SYSTEM\\usart",
-                "c:\\32\\stm32F4\\实验0 Template工程模板\\USER",
-                "c:\\32\\stm32F4\\实验0 Template工程模板\\FWLIB\\inc",
-                "c:\\32\\stm32F4\\实验0 Template工程模板\\Driver",
-                "c:\\32\\stm32F4\\实验0 Template工程模板\\Hardware",
-                "c:\\32\\stm32F4\\实验0 Template工程模板\\SYSTEM",
+                "c:\\32\\stm32F4\\超声波发送\\CORE",
+                "c:\\32\\stm32F4\\超声波发送\\SYSTEM\\delay",
+                "c:\\32\\stm32F4\\超声波发送\\SYSTEM\\sys",
+                "c:\\32\\stm32F4\\超声波发送\\SYSTEM\\usart",
+                "c:\\32\\stm32F4\\超声波发送\\USER",
+                "c:\\32\\stm32F4\\超声波发送\\FWLIB\\inc",
+                "c:\\32\\stm32F4\\超声波发送\\Driver",
+                "c:\\32\\stm32F4\\超声波发送\\Hardware",
+                "c:\\32\\stm32F4\\超声波发送\\SYSTEM",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
-                "c:\\32\\stm32F4\\实验0 Template工程模板\\FWLIB\\src",
-                "c:\\32\\stm32F4\\实验0 Template工程模板"
+                "c:\\32\\stm32F4\\超声波发送\\FWLIB\\src",
+                "c:\\32\\stm32F4\\超声波发送"
             ],
             "defines": [
                 "STM32F40_41xxx",
